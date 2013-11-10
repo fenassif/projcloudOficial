@@ -2,4 +2,4 @@ web1:
   php_version: 5.3.23
   php_extensions:
     - mysql
-	- curl
+    - curl
