@@ -1,5 +1,6 @@
-<?php
+<?php 
 include_once 'InstagramAPI.php';
+include_once 'TwitterAPI.php';
 
 // Supply a user id and an access token
 $locationid = "450867";
@@ -7,7 +8,8 @@ $userid = "cbdb75bc1aa241eeadc88e9f57bf7e79";
 $accessToken = "175023443.5b9e1e6.eefc96957f204e6ba40ef1c2781cacbd";
 
 $InstagramAPI = new InstagramAPI($locationid, $userid, $accessToken);
-$result = $InstagramAPI->getRecentPhotos();
+$tag = isset($_GET['tag']) ? $_GET['tag'] : 'coffe';
+$result = $InstagramAPI->getRecentPhotos(urldecode($tag));
 ?>
 
 <!DOCTYPE html>
@@ -70,19 +72,13 @@ $result = $InstagramAPI->getRecentPhotos();
 
 
                 <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-
-                    <a href="#" class="list-group-item active">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
-                    <a href="#" class="list-group-item">Link</a>
+                    <?php foreach(getIrelandTrends() as $topic):?>
+                    <a href="?tag=<?php echo urlencode($topic['name']) ?>" class="list-group-item"><?php echo $topic['name'] ?></a>
+                    <?php endforeach;?>
                 </div>
 
+                
+                
  <div class="col-xs-12 col-sm-9">
                     <p class="pull-right visible-xs">
                         <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>

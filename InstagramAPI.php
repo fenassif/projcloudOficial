@@ -15,10 +15,10 @@ class InstagramAPI {
 
 
     
-    public function getRecentPhotos () {
+    public function getRecentPhotos ($tag = 'car') {
         
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://api.instagram.com/v1/tags/coffee/media/recent?access_token={$this->accessToken}");
+        curl_setopt($ch, CURLOPT_URL, "https://api.instagram.com/v1/tags/".$tag."/media/recent?access_token={$this->accessToken}");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, 20);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); 
