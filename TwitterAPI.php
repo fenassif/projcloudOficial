@@ -12,6 +12,8 @@ function getIrelandTrends() {
     $query = array(// query parameters
         'id' => '560743',
     );
+    
+    
     $oauth = array(
         'oauth_consumer_key' => $consumer_key,
         'oauth_token' => $token,
@@ -20,6 +22,8 @@ function getIrelandTrends() {
         'oauth_signature_method' => 'HMAC-SHA1',
         'oauth_version' => '1.0'
     );
+    
+    
     $oauth = array_map("rawurlencode", $oauth); // must be encoded before sorting
     $query = array_map("rawurlencode", $query);
     $arr = array_merge($oauth, $query); // combine the values THEN sort
@@ -68,4 +72,3 @@ function getIrelandTrends() {
     //var_dump($twitter_data);die;
     return $twitter_data[0]["trends"];
 }
-
