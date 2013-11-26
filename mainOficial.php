@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once 'InstagramAPI.php';
 include_once 'TwitterAPI.php';
 
@@ -29,6 +29,7 @@ $result = $InstagramAPI->getRecentPhotos(urldecode($tag));
 
         <!-- Custom styles for this template -->
         <link href="assets/css/offcanvas.css" rel="stylesheet">
+        <link href="assets/css/gallery.css" rel="stylesheet">
 
         <!-- Just for debugging purposes. Don't actually copy this line! -->
         <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -71,55 +72,64 @@ $result = $InstagramAPI->getRecentPhotos(urldecode($tag));
             <div class="row row-offcanvas row-offcanvas-right">
 
 
-                <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-                    <?php foreach(getIrelandTrends() as $topic):?>
-                    <a href="?tag=<?php echo urlencode($topic['name']) ?>" class="list-group-item"><?php echo $topic['name'] ?></a>
-                    <?php endforeach;?>
+                <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation"> 
+                    <div class="jumbotron">  
+                    <img src= "images/1384146449_social_8.png" width="150px" height="150px">
+                    </div>
+                    <br>
+                    <br>
+                    <?php foreach (getIrelandTrends() as $topic): ?>
+                        <a href="?tag=<?php echo ($topic['name']) ?>" class="list-group-item"><?php echo str_replace("#", "", $topic['name']) ?></a>
+                    <?php endforeach; ?>
+
                 </div>
 
-                
-                
- <div class="col-xs-12 col-sm-9">
+
+
+                <div class="col-xs-12 col-sm-9">
                     <p class="pull-right visible-xs">
                         <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
                     </p>
-                <div class="jumbotron">
-                    <h1>Hello, world!</h1>
-                    <p> Selecet the TrendTopic to see the photo on Instagram</p>
-                </div>
+                    <div class="jumbotron" align="center">
+                         <img src= "images/1384146475_social_6.png" alt="Instagram" width="150px" height="150px"  >    
+                        <h1>Hello, Ireland!</h1>
+                        <p> <i> Select the TrendTopic to see Instagram's gallery </i> </p>
+                                   
+                                    
+                               </div>
 
-                <div class="row">
-                    <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                 
+                                         <?php if (empty($result->data)): ?>
+
+                                                <p> No photos available </p>
+                                            <?php else: ?>
+                                                <?php foreach ($result->data as $post): ?>
+                                                    <a class="group hovergallery"  rel="group1" href="<?= $post->images->standard_resolution->url ?>">
+                                                        <img src="<?= $post->images->thumbnail->url ?>">
+                                                    </a>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </div>
 
 
-                        <?php foreach ($result->data as $post): ?>
-                            <a class="group" rel="group1" 
-                               href="<?= $post->images->standard_resolution->url ?>">
-                                <img src="<?= $post->images->thumbnail->url ?>">
-                            </a>
-                        <?php endforeach ?>
-
-                    </div>
-
-
-                </div><!--/.container-->
-
-
-
-
-                <footer>
-                    <p>&copy; Fernanda 2013</p>
-                </footer>
-
-            </div><!--/.container-->
+                                    </div><!--/.container-->
 
 
 
-            <!-- Bootstrap core JavaScript
-            ================================================== -->
-            <!-- Placed at the end of the document so the pages load faster -->
-            <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-            <script src="assets/js/bootstrap.min.js"></script>
-            <script src="assets/js/offcanvas.js"></script>
-    </body>
-</html>
+
+                                    <footer>
+                                        <p>&copy; Fernanda 2013</p>
+                                    </footer>
+
+                                    </div><!--/.container-->
+
+
+                                   
+                                    <!-- Placed at the end of the document so the pages load faster -->
+                                    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+                                    <script src="assets/js/bootstrap.min.js"></script>
+                                    <script src="assets/js/offcanvas.js"></script>
+                                    </body>
+                                    </html>
