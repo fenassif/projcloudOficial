@@ -2,6 +2,13 @@
 include_once 'InstagramAPI.php';
 include_once 'TwitterAPI.php';
 
+if (($trends= apc_fetch('trends')) == FALSE) {
+    $trends = getIrelandTrends();
+    apc_add('trends', $trends, 60);
+} 
+
+
+
 // Supply a user id and an access token
 $locationid = "450867";
 $userid = "cbdb75bc1aa241eeadc88e9f57bf7e79";
@@ -78,7 +85,7 @@ $result = $InstagramAPI->getRecentPhotos(urldecode($tag));
                     </div>
                     <br>
                     <br>
-                    <?php foreach (getIrelandTrends() as $topic): ?>
+                    <?php foreach ($trends as $topic): ?>
                         <a href="?tag=<?php echo ($topic['name']) ?>" class="list-group-item"><?php echo str_replace("#", "", $topic['name']) ?></a>
                     <?php endforeach; ?>
 
