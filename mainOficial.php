@@ -5,7 +5,10 @@ include_once 'TwitterAPI.php';
 if (($trends= apc_fetch('trends')) == FALSE) {
     $trends = getIrelandTrends();
     apc_add('trends', $trends, 60);
-} 
+    var_dump('carregando da api');
+} //else {
+//    var_dump('carregando do cache');
+//}
 
 
 
